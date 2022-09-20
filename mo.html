@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>배꾸 이벤트</title>
+<link rel="stylesheet" href="./css/jquery-ui.css">
+<link rel="stylesheet" href="./css/style_mo.css">
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+<script src="./js/jquery.ui.rotatable.js"></script>
+<script src="./js/jquery.ui.touch-punch.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	// ready
+	var zoneH = $('.adorn_zone').width();
+	zoneH = zoneH * 5 / 4;
+	$('.adorn_zone').height(zoneH);
+
+
+
+	// background
+	$('input:radio[name="bg_sel"]').on('change', function(){
+		var bgVal = $('input:radio[name="bg_sel"]:checked').val();
+		
+		$('.adorn_zone .ad_bg').css('background-image', 'url('+ bgVal +')');
+		$('.adorn_zone').addClass('active');
+
+		ad_pop_close();
+	});
+
+	$("#uploadFile").on("change", function(event) {
+		var file = event.target.files[0];
+		var reader = new FileReader(); 
+		reader.onload = function(e) {
+			$('.adorn_zone .ad_bg').css('background-image', 'url('+ e.target.result +')');
+		}
+		reader.readAsDataURL(file);
+
+		$('input:radio[name="bg_sel"]').prop("checked", false);
+		$('.adorn_zone').addClass('active');
+	});
+
+
+
+	// sticker img
+	$('.ad_stk_sel li button').on('click', function(){
+		var stkImg = $(this).find('img').attr('src');
+		stickerMake(stkImg);
+
+		ad_pop_close();
+	});
+
+
+
+	// sticker tex
+	$('#tex_area').on({
+		// click: function(){
+		// 	if(! $('.sticker.active').find('.text').length) {
+		// 		stickerMake();
+		// 	}
+		// },
+		keyup: function(){
+			$(this).css('height', '15px');
+			$(this).height(this.scrollHeight);
+
+			var texVal = $(this).val();
+			texVal = texVal.replaceAll("\n", "<br>");
+
+			$('.sticker.active').find('.text').html(texVal);
+
+			if($('.sticker.active').find('.text').hasClass('new')) {
+				var itemId = $('.sticker.active').attr('id');
+				var itemleft = ($('.adorn_zone').width() / 2) - ($('#' + itemId).width() / 2);
+
+				$('#' + itemId).css({'left':itemleft});
+			}
+		},
+	});
+
+	$('#tex_comp').on('click', function(){
+		var texVal = $('#tex_area').val();
+		if(texVal) {
+			texVal = texVal.replaceAll("\n", "<br>");
+			if(! $('.sticker.active').find('.text').length) {
+				stickerMake();
+			}
+			$('.sticker.active').find('.text').html(texVal);
+
+			$('.ad_tex_area.ad_pop').removeClass('active');
+			setTimeout(function() {
+				$('.ad_tex_area.ad_pop').fadeOut(100);
+			}, 200);
+		}
+	});
+
+	$('input:radio[name="font_siz"]').on('change', function(){
+		var fonSizVal = $('input:radio[name="font_siz"]:checked').val();
+		$('.sticker.active').find('.text').css('font-size', fonSizVal);
+		ad_pop_close();
+	});
+
+	$('input:radio[name="font_col"]').on('change', function(){
+		var fonColVal = $('input:radio[name="font_col"]:checked').val();
+		$('.sticker.active').find('.text').css('color', fonColVal);
+		ad_pop_close();
+	});
+
+
+
+	// adorn_zone bg
+	$('.adorn_zone .ad_bg').on('click', function(){
+		selReset();
+		ad_pop_close();
+	});
+
+
+
+	// ad_item_btn - mo pop
+	$('.item_bg button').on('click', function(){
+		selReset();
+		$('.ad_bg_list.ad_pop').fadeIn(100, function(){
+			$('.ad_bg_list.ad_pop').addClass('active');
+		});
+	});
+
+	$('.item_stk button').on('click', function(){
+		selReset();
+		$('.ad_stk_list.ad_pop').fadeIn(100, function(){
+			$('.ad_stk_list.ad_pop').addClass('active');
+		});
+	});
+
+	$('.item_tex button').on('click', function(){
+		selReset();
+		$('.ad_tex_area.ad_pop').fadeIn(100, function(){
+			$('.ad_tex_area.ad_pop').addClass('active');
+		});
+		$('#tex_area').focus();
+	});
+
+	$('.ad_pop .ad_pop_close').on('click', function(){
+		ad_pop_close();
+	});
+
+});
+
+
+
+var itemCount = 0;
+
+function stickerMake(src) {
+
+
+	$('.adorn_zone').addClass('active');
+	selReset();
+
+	itemCount = itemCount + 1;
+
+	var itemId = itemCount.toString().length < 2 ? '0' + itemCount : itemCount;
+	itemId = 'item_' + itemId;
+
+	$('.adorn_zone').append('<div class="sticker active" id="'+ itemId +'"></div>');
+
+	if(src) {
+
+		$('#' + itemId).append('<img src="'+ src +'">');
+
+		$('#' + itemId).resizable({
+			aspectRatio: true,
+			// handles: "n, e, s, w, se, sw, nw, ne",
+			handles: "se",
+		});
+
+		setTimeout(function() {
+			var itemImgW = $('#' + itemId).find('img').width();
+			var itemImgH = $('#' + itemId).find('img').height();
+			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
+		}, 1);
+
+	} else {
+
+		$('#' + itemId).append('<div class="text new"></div>');
+		$('#' + itemId).append('<button type="button" class="edit">edit</button>');
+		$('#' + itemId).append('<button type="button" class="opt">option</button>');
+
+		var fonSizVal = $('input:radio[name="font_siz"]:checked').val();
+		var fonColVal = $('input:radio[name="font_col"]:checked').val();
+		$('#' + itemId).find('.text').css({'font-size':fonSizVal, 'color':fonColVal});
+
+	}
+
+	$('#' + itemId).append('<button type="button" class="del">delete</button>');
+
+	$('#' + itemId).rotatable().draggable();
+	
+	setTimeout(function() {
+		var itemTop = ($('.adorn_zone').height() / 2) - ($('#' + itemId).height() / 2);
+		var itemleft = ($('.adorn_zone').width() / 2) - ($('#' + itemId).width() / 2);
+		$('#' + itemId).css({'left':itemleft, 'top':itemTop});
+	}, 1);
+
+
+	// sticker event
+	$('#' + itemId).on('click touchstart mousedown', function(){
+
+		selReset();
+
+		$(this).addClass('active');
+		$('.adorn_zone').append($(this));
+
+		if($(this).find('.text').length) {
+			var texSel = $(this).find('.text').html();
+			texSel = texSel.replaceAll("<br>", "\n");
+
+			var texColVal = $(this).find('.text').css('color');
+			texColVal = rgb2hex(texColVal);
+
+			var texSizVal = $(this).find('.text').css('font-size');
+
+			$('#tex_area').val(texSel);
+			$('#tex_area').height($('#tex_area')[0].scrollHeight);
+			$('#tex_area').focus();
+
+			$('input:radio[name="font_col"][value="'+ texColVal +'"]').prop("checked", true);
+			$('input:radio[name="font_siz"][value="'+ texSizVal +'"]').prop("checked", true);
+
+			$(this).find('.text').removeClass('new');
+		} else {
+			ad_pop_close();
+		}
+	});
+
+	$('#' + itemId).find('.del').on('click touchstart mousedown', function(){
+		$(this).closest('.sticker').remove();
+		selReset();
+
+		var bgFalse = !$('.ad_bg[style*="background-image"]').length;
+		var stFalse= !$('.adorn_zone').find('.sticker').length;
+		if(bgFalse && stFalse) {
+			$('.adorn_zone').removeClass('active');
+		}
+		
+	});
+
+	$('#' + itemId).find('.edit').on('click touchstart mousedown', function(){
+		$('.ad_tex_area.ad_pop').fadeIn(100, function(){
+			$('.ad_tex_area.ad_pop').addClass('active');
+		});
+	});
+
+	$('#' + itemId).find('.opt').on('click touchstart mousedown', function(){
+		$('.ad_tex_opt.ad_pop').fadeIn(100, function(){
+			$('.ad_tex_opt.ad_pop').addClass('active');
+		});
+	});
+
+} // stickerMake()
+
+
+function selReset() {
+	$('.sticker').removeClass('active');
+	$('#tex_area').val('');
+	$('#tex_area').css('height', '');
+	$('input:radio[name="font_siz"]#foSize01').prop("checked", true);
+	$('input:radio[name="font_col"]#foColor01').prop("checked", true);
+} // selReset()
+
+
+function ad_pop_close() {
+	$('.ad_pop').removeClass('active');
+	setTimeout(function() {
+		$('.ad_pop').fadeOut(100);
+	}, 200);
+} // selReset()
+
+
+function rgb2hex(rgb) {
+	rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+	function hex(x) {
+		return ("0" + parseInt(x).toString(16)).slice(-2);
+	}
+	return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+} // rgb2hex()
+
+
+function adornComplete() {
+	if(!$('.adorn_zone').hasClass('active')) {
+		alert('꾸며주세요');
+	} else {
+		alert('해시태그 복사, 이미지 다운로드, 인스타그램 링크');
+	}
+} // adornComplete()
+
+</script>
+</head>
+<body>
+
+<div class="adorn_wrap">
+	<div class="adorn_area">
+
+		<div class="adorn_zone" id="adorn_zone">
+			<div class="ad_bg" id="bg"></div>
+			<div class="ad_info">
+				<span style="display:block; height:100%; padding-top:100px; box-sizing:border-box; background-color:#ccc; text-align:center;">배꾸 이벤트<br> 4:5</span>
+			</div>
+		</div> <!-- // adorn_zone -->
+
+		<div class="ad_item_btn">
+			<ul>
+				<li class="item_bg"><button><span class="blind">배경</span></button></li>
+				<li class="item_file"><button onclick="document.getElementById('uploadFile').click();"><span class="blind">사진 불러오기</span></button></li>
+				<li class="item_stk"><button><span class="blind">스티커</span></button></li>
+				<li class="item_tex"><button><span class="blind">텍스트</span></button></li>
+			</ul>
+		</div>
+
+		<div class="ad_hashtag">
+			<strong>이벤트 참여 필수 해시태그</strong>
+			<ul>
+				<li>#유플러스</li>
+				<li>#아이폰14</li>
+				<li>#MBT_i</li>
+				<li>#유플펀</li>
+			</ul>
+			<i>이벤트 응모 시 자동 복사 됩니다.</i>
+		</div>
+
+		<div class="ad_complete">
+			<button onclick="adornComplete()">배경 저장하고 이벤트 응모하기</button>
+		</div>
+
+	</div> <!-- // adorn_area -->
+
+	<div class="adorn_item">
+
+		<div class="ad_bg_sel">
+			<h3>배경</h3>
+			<div class="ad_bg_list ad_pop">
+				<ul>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg01" value="./images/bg/sample_bg01.jpg">
+							<label for="bg01"><img src="./images/bg/sample_bg01.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg02" value="./images/bg/sample_bg02.jpg">
+							<label for="bg02"><img src="./images/bg/sample_bg02.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg03" value="./images/bg/sample_bg01.jpg">
+							<label for="bg03"><img src="./images/bg/sample_bg01.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg04" value="./images/bg/sample_bg02.jpg">
+							<label for="bg04"><img src="./images/bg/sample_bg02.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg05" value="./images/bg/sample_bg01.jpg">
+							<label for="bg05"><img src="./images/bg/sample_bg01.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg06" value="./images/bg/sample_bg02.jpg">
+							<label for="bg06"><img src="./images/bg/sample_bg02.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg07" value="./images/bg/sample_bg01.jpg">
+							<label for="bg07"><img src="./images/bg/sample_bg01.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg08" value="./images/bg/sample_bg02.jpg">
+							<label for="bg08"><img src="./images/bg/sample_bg02.jpg" alt=""></label>
+						</div>
+					</li>
+					<li>
+						<div class="inp_radio">
+							<input type="radio" name="bg_sel" id="bg09" value="./images/bg/sample_bg01.jpg">
+							<label for="bg09"><img src="./images/bg/sample_bg01.jpg" alt=""></label>
+						</div>
+					</li>
+				</ul>
+				<button class="ad_pop_close">close</button>
+			</div>
+			<div class="ad_bg_file">
+				<input type="file" name="file" id="uploadFile" class="blind" accept="image/*">
+				<button onclick="document.getElementById('uploadFile').click();">사진 불러오기</button>
+			</div>
+		</div> <!-- // bg_sel -->
+
+		<div class="ad_stk_sel">
+			<h3>스티커</h3>
+			<div class="ad_stk_list ad_pop">
+				<ul>
+					<li><button><img src="./images/sticker/add_shopping_cart_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/alarm_on_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/rocket_launch_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/flutter_dash_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/pets_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/add_shopping_cart_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/alarm_on_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/rocket_launch_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/flutter_dash_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/pets_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/add_shopping_cart_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/alarm_on_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/rocket_launch_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/flutter_dash_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/pets_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/add_shopping_cart_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/alarm_on_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/rocket_launch_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/flutter_dash_black_48dp.svg" alt=""></button></li>
+					<li><button><img src="./images/sticker/pets_black_48dp.svg" alt=""></button></li>
+				</ul>
+				<button class="ad_pop_close">close</button>
+			</div>
+		</div> <!-- // stk_sel -->
+
+		<div class="ad_tex_sel">
+			<h3>텍스트</h3>
+
+			<div class="ad_tex_area ad_pop">
+				<div class="tex_area">
+					<textarea id="tex_area" placeholder="입력해주세요"></textarea>
+					<button id="tex_comp">완료</button>
+				</div>
+				<button class="ad_pop_close">close</button>
+			</div>
+
+			<div class="ad_tex_opt ad_pop">
+				<div class="ad_tex_col">
+					<dl>
+						<dt>색상</dt>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor01" value="#000" checked>
+								<label for="foColor01" style="background-color:#000;"><span class="blind">#000</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor02" value="#fff">
+								<label for="foColor02" style="background-color:#fff;"><span class="blind">#fff</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor03" value="#f40000">
+								<label for="foColor03" style="background-color:#f40000;"><span class="blind">#f40000</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor04" value="#f9bf00">
+								<label for="foColor04" style="background-color:#f9bf00;"><span class="blind">#f9bf00</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor05" value="#fefe00">
+								<label for="foColor05" style="background-color:#fefe00;"><span class="blind">#fefe00</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor06" value="#36b04b">
+								<label for="foColor06" style="background-color:#36b04b;"><span class="blind">#36b04b</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor07" value="#2771c3">
+								<label for="foColor07" style="background-color:#2771c3;"><span class="blind">#2771c3</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor08" value="#092162">
+								<label for="foColor08" style="background-color:#092162;"><span class="blind">#092162</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor09" value="#6d31a2">
+								<label for="foColor09" style="background-color:#6d31a2;"><span class="blind">#6d31a2</span></label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_col" id="foColor10" value="#dfebf8">
+								<label for="foColor10" style="background-color:#dfebf8;"><span class="blind">#dfebf8</span></label>
+							</div>
+						</dd>
+					</dl>
+				</div>
+
+				<div class="ad_tex_siz">
+					<dl>
+						<dt>크기</dt>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_siz" id="foSize01" value="20px" checked>
+								<label for="foSize01">01</label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_siz" id="foSize02" value="25px">
+								<label for="foSize02">02</label>
+							</div>
+						</dd>
+						<dd>
+							<div class="inp_radio">
+								<input type="radio" name="font_siz" id="foSize03" value="30px">
+								<label for="foSize03">03</label>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				
+				<button class="ad_pop_close">close</button>
+			</div> <!-- // ad_tex_opt -->
+
+		</div> <!-- // ad_tex_sel -->
+
+	</div> <!-- // adorn_item -->
+</div> <!-- // adorn_wrap -->
+
+</body>
+</html>
