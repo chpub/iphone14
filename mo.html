@@ -11,6 +11,14 @@
 <script src="./js/jquery.ui.rotatable.js"></script>
 <script src="./js/jquery.ui.touch-punch.min.js"></script>
 <script>
+
+$(window).resize(function() {
+  var zoneH = $('.adorn_zone').width();
+	zoneH = zoneH * 5 / 4;
+	$('.adorn_zone').height(zoneH);
+}); // window resize
+
+
 $(document).ready(function(){
 
 	// ready
@@ -293,18 +301,6 @@ function adornComplete() {
 	}
 } // adornComplete()
 
-
-// $(function(){
-// 	$(".ad_tex_sel input").each(function(){
-// 		$(this).bind("focus", function(){
-// 			$("body").css("position", "absolute");
-// 		});
-
-// 		$(this).bind("blur",function(){
-// 			$("body").css("position", "fixed");
-// 		});
-// 	});
-// });
 
 </script>
 </head>
