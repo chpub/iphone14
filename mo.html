@@ -293,6 +293,19 @@ function adornComplete() {
 	}
 } // adornComplete()
 
+
+$(function(){
+	$(".ad_tex_sel input").each(function(){
+		$(this).bind("focus", function(){
+			$("body").css("position", "absolute");
+		});
+
+		$(this).bind("blur",function(){
+			$("body").css("position", "fixed");
+		});
+	});
+});
+
 </script>
 </head>
 <body>
