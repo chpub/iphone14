@@ -103,7 +103,6 @@
 .ad_stk_list li:nth-child(4n - 2) {margin-left:10px;}
 .ad_stk_list li:nth-child(4n) ~ li {margin-top:10px;}
 .ad_stk_list li button {width:100%; height:100%; padding:0; border:0; box-sizing:border-box; background-color:transparent; overflow:hidden;}
-.ad_stk_list li button:hover {background-color:#efefef;}
 .ad_stk_list li button img {display:block; width:100%;}
 
 /* text */
