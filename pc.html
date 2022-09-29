@@ -121,12 +121,6 @@ function stickerMake(src) {
 			handles: "se, sw, nw",
 		});
 
-		setTimeout(function() {
-			var itemImgW = $('#' + itemId).find('img').width();
-			var itemImgH = $('#' + itemId).find('img').height();
-			$('#' + itemId).css({'width':200, 'height':itemImgH});
-		}, 10);
-
 	} else {
 
 		$('#' + itemId).append('<div class="text new"></div>');
