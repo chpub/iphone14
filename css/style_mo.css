@@ -24,7 +24,7 @@
 .ad_info ul li {display:flex; align-items:center; font-size:4.7863vw; line-height:6.8376vw; text-align:left;}
 .ad_info ul li ~ li {margin-top:2.5641vw;}
 .ad_info ul li span {padding-left:2.5641vw;}
-.ad_info ul li em {width:17.094vw; height:6.8376vw; padding:0.8547vw 3.1623vw; font-size:3.7606vw; color:#fff; font-weight:bold; background-color:#0F6FA7; border-radius:3.4188vw; font-style:normal; text-align:center;}
+.ad_info ul li em {width:17.094vw; height:6.8376vw; padding:0.8547vw 3.1623vw; font-size:3.7606vw; color:#fff; font-weight:bold; background-color:#0F6FA7; border-radius:6.8376vw; font-style:normal; text-align:center;}
 .ad_info p {margin-top:6.5811vw; font-size:3.589vw; opacity:0.7;}
 .ad_info.active {display:none;}
 
