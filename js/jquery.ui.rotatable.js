@@ -20,7 +20,7 @@
         top: 0,
         left: 0,
       },
-      radians: true, // specify angle in radians
+      radians: false, // specify angle in radians
       rotate: null, // a callback for during rotation
       rotationCenterOffset: {
         // offset the center of the element for rotation
@@ -399,10 +399,6 @@
     },
   });
 
-  return $.ui.rotatable;
-});
-
-$(document).ready(function () {
   $.ui.resizable.prototype._mouseDrag = function (event) {
     var angle = getAngle(this.element[0]);
 
@@ -503,4 +499,6 @@ $(document).ready(function () {
     var newAxisIndex = (index + octant) % 8;
     return axisArray[newAxisIndex];
   }
+
+  return $.ui.rotatable;
 });
