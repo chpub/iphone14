@@ -9,6 +9,7 @@
 <meta property="og:image" content="공유시 보여질 이미지 경로">
 <meta property="og:description" content="공유시 보여질 설명">
 <title>배꾸 이벤트</title>
+<link rel="icon" href="./images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/jquery-ui.css">
 <link rel="stylesheet" href="./css/style_mo.css">
 <script src="./js/jquery-1.12.4.min.js"></script>
@@ -32,38 +33,38 @@ $(document).ready(function(){
 	
 	// background first image fix
 	var bgVal = $('input:radio[name="bg_sel"]:checked').val();
-	$('.adorn_zone .ad_bg').css('background-image', 'url('+ bgVal +')');
+	$('.adorn_zone .adorn_bg').css('background-image', 'url('+ bgVal +')');
 	
 	// background
 	$('input:radio[name="bg_sel"]').on('change', function(){
 		var bgVal = $('input:radio[name="bg_sel"]:checked').val();
 		
-		$('.adorn_zone .ad_bg').css('background-image', 'url('+ bgVal +')');
-		$('.ad_info').addClass('active');
+		$('.adorn_zone .adorn_bg').css('background-image', 'url('+ bgVal +')');
+		$('.adorn_info').addClass('active');
 
-		ad_pop_close();
+		adorn_pop_close();
 	});
 
 	$("#uploadFile").on("change", function(event) {
 		var file = event.target.files[0];
 		var reader = new FileReader(); 
 		reader.onload = function(e) {
-			$('.adorn_zone .ad_bg').css('background-image', 'url('+ e.target.result +')');
+			$('.adorn_zone .adorn_bg').css('background-image', 'url('+ e.target.result +')');
 		}
 		reader.readAsDataURL(file);
 
 		$('input:radio[name="bg_sel"]').prop("checked", false);
-		$('.ad_info').addClass('active');
+		$('.adorn_info').addClass('active');
 	});
 
 
 
 	// sticker img
-	$('.ad_stk_sel li button').on('click', function(){
+	$('.adorn_stk_sel li button').on('click', function(){
 		var stkImg = $(this).find('img').attr('src');
 		stickerMake(stkImg);
 
-		ad_pop_close();
+		adorn_pop_close();
 	});
 
 
@@ -102,9 +103,9 @@ $(document).ready(function(){
 			}
 			$('.sticker.active').find('.text').html(texVal);
 
-			$('.ad_tex_area.ad_pop').removeClass('active');
+			$('.adorn_tex_area.adorn_pop').removeClass('active');
 			setTimeout(function() {
-				$('.ad_tex_area.ad_pop').fadeOut(100);
+				$('.adorn_tex_area.adorn_pop').fadeOut(100);
 			}, 200);
 		}
 	});
@@ -112,48 +113,48 @@ $(document).ready(function(){
 	$('input:radio[name="font_siz"]').on('change', function(){
 		var fonSizVal = $('input:radio[name="font_siz"]:checked').val();
 		$('.sticker.active').find('.text').css('font-size', fonSizVal);
-		ad_pop_close();
+		adorn_pop_close();
 	});
 
 	$('input:radio[name="font_col"]').on('change', function(){
 		var fonColVal = $('input:radio[name="font_col"]:checked').val();
 		$('.sticker.active').find('.text').css('color', fonColVal);
-		ad_pop_close();
+		adorn_pop_close();
 	});
 
 
 	// adorn_zone bg
-	$('.adorn_zone .ad_bg').on('click', function(){
+	$('.adorn_zone .adorn_bg').on('click', function(){
 		selReset();
-		ad_pop_close();
+		adorn_pop_close();
 	});
 
 
 	// ad_item_btn - mo pop
 	$('.item_bg button').on('click', function(){
 		selReset();
-		$('.ad_bg_list.ad_pop').fadeIn(100, function(){
-			$('.ad_bg_list.ad_pop').addClass('active');
+		$('.adorn_bg_list.adorn_pop').fadeIn(100, function(){
+			$('.adorn_bg_list.adorn_pop').addClass('active');
 		});
 	});
 
 	$('.item_stk button').on('click', function(){
 		selReset();
-		$('.ad_stk_list.ad_pop').fadeIn(100, function(){
-			$('.ad_stk_list.ad_pop').addClass('active');
+		$('.adorn_stk_list.adorn_pop').fadeIn(100, function(){
+			$('.adorn_stk_list.adorn_pop').addClass('active');
 		});
 	});
 
 	$('.item_tex button').on('click', function(){
 		selReset();
-		$('.ad_tex_area.ad_pop').fadeIn(100, function(){
-			$('.ad_tex_area.ad_pop').addClass('active');
+		$('.adorn_tex_area.adorn_pop').fadeIn(100, function(){
+			$('.adorn_tex_area.adorn_pop').addClass('active');
 		});
 		$('#tex_area').focus();
 	});
 
-	$('.ad_pop .ad_pop_close').on('click', function(){
-		ad_pop_close();
+	$('.adorn_pop .adorn_pop_close').on('click', function(){
+		adorn_pop_close();
 	});
 
 });
@@ -165,7 +166,7 @@ var itemCount = 0;
 function stickerMake(src) {
 
 
-	$('.adorn_zone, .ad_info').addClass('active');
+	$('.adorn_zone, .adorn_info').addClass('active');
 	selReset();
 
 	itemCount = itemCount + 1;
@@ -182,7 +183,7 @@ function stickerMake(src) {
 		$('#' + itemId).resizable({
 			aspectRatio: true,
 			// handles: "n, e, s, w, se, sw, nw, ne",
-			handles: "se, sw, nw",
+			handles: "se"
 		});
 
 
@@ -245,20 +246,20 @@ function stickerMake(src) {
 
 		var stFalse = !$('.adorn_zone').find('.sticker').length;
 		if(stFalse) {
-			$('.adorn_zone, .ad_info').removeClass('active');
+			$('.adorn_zone, .adorn_info').removeClass('active'); // 스티커를 생성하고 나서 삭제시 가이드부분 미노출 (.ad_info 삭제)
 		}
 		
 	});
 
 	$('#' + itemId).find('.edit').on('click touchstart mousedown', function(){
-		$('.ad_tex_area.ad_pop').fadeIn(100, function(){
-			$('.ad_tex_area.ad_pop').addClass('active');
+		$('.adorn_tex_area.adorn_pop').fadeIn(100, function(){
+			$('.adorn_tex_area.adorn_pop').addClass('active');
 		});
 	});
 
 	$('#' + itemId).find('.opt').on('click touchstart mousedown', function(){
-		$('.ad_tex_opt.ad_pop').fadeIn(100, function(){
-			$('.ad_tex_opt.ad_pop').addClass('active');
+		$('.adorn_tex_opt.adorn_pop').fadeIn(100, function(){
+			$('.adorn_tex_opt.adorn_pop').addClass('active');
 		});
 	});
 
@@ -274,10 +275,10 @@ function selReset() {
 } // selReset()
 
 
-function ad_pop_close() {
-	$('.ad_pop').removeClass('active');
+function adorn_pop_close() {
+	$('.adorn_pop').removeClass('active');
 	setTimeout(function() {
-		$('.ad_pop').fadeOut(100);
+		$('.adorn_pop').fadeOut(100);
 	}, 200);
 } // selReset()
 
@@ -291,9 +292,11 @@ function rgb2hex(rgb) {
 } // rgb2hex()
 
 
+// 2022.10.04 수정 
 function adornComplete() {
 	if(!$('.adorn_zone').hasClass('active')) {
-		alert('배경화면을 꾸며주세요');
+		// alert('배경화면을 꾸며주세요');
+		$('#alert01').show(); // 2022.10.04 추가
 	} else {
 		// 이미지 생성, 다운로드 (dom-to-image, FileSaver js)
 		// * 'adorn_zone'내 html, css 이미지 절대경로 사용
@@ -311,16 +314,33 @@ function adornComplete() {
 		// });
 
 		// 클립보드 해시태그 복사
-		// var clipCon = $('.ad_hashtag ul li').text();    
+		// var clipCon = $('.adorn_hashtag ul li').text();    
 		// clipCon = clipCon.replace('#', ' #').replace(/^\s/g, '');
 		// window.navigator.clipboard.writeText(clipCon);
 
-		alert('이미지가 저장되고 해시태그가 복사되었습니다.\n인스타그램에 게재하여야 이벤트에 응모됩니다.');
+		// alert('이미지가 저장되고 해시태그가 복사되었습니다.\n인스타그램에 게재하여야 이벤트에 응모됩니다.');
+
+		$('#alert02, .dim').show(); // 2022.10.04 추가
+		$('body').css('overflow','hidden') // 2022.10.04 추가
+
 		
 		// 인스타그램 링크
 		// window.open('https://www.instagram.com/');
 	}
+
+
+	$('#hashtagbtn').on('click', function(){
+		$('#alert02, .dim').hide(); // 2022.10.04 추가
+		$('body').attr('style','') // 2022.10.04 추가
+		window.open('https://www.instagram.com/');
+	});
+
+	setTimeout(function(){
+		document.getElementById("alert01").style.display="none";
+	},3000);
+
 } // adornComplete()
+
 
 </script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
@@ -332,10 +352,10 @@ function adornComplete() {
 		<div class="adorn_area">
 
 			<div class="adorn_zone" id="adorn_zone">
-				<div class="ad_bg" id="bg"></div>
+				<div class="adorn_bg" id="bg"></div>
 			</div> <!-- // adorn_zone -->
 
-			<div class="ad_info">
+			<div class="adorn_info">
 				<div class="img">
 					<img src="./images/icon/star_ico.png" alt="">
 				</div>
@@ -362,12 +382,26 @@ function adornComplete() {
 				<p>
 					모든 저작물은 초상권, 지적재산권, 저작권 등의 법리적 문제가 전혀 없어야 하며 문제가 있을 시 수상에서 제외될 수 있습니다
 				</p>
-			</div> <!-- // ad_info -->
+
+				<!-- 2022.10.05 레이어팝업 추가 -->
+				<div class="alert" id="alert01">
+					<div class="alert_wrap">
+						<div class="alert_inner">
+							<img src="../images/icon/ico_alert.svg" alt="느낌표">
+							배경화면을 꾸며주세요
+						</div>
+						<button onclick="$('#alert01').hide();"></button>
+					</div>
+				</div> <!-- // layer popup -->
+
+			</div> <!-- // adorn_info -->
+
+
 		</div> <!-- // adorn_area -->
 
 		<div class="adorn_item">
 		
-			<div class="ad_item_btn">
+			<div class="adorn_item_btn">
 				<ul>
 					<li class="item_bg"><button><img src="./images/btn/btn_mo_01_bg.svg" alt="배경이미지"></button></li>
 					<li class="item_file"><button onclick="document.getElementById('uploadFile').click();"><img src="./images/btn/btn_mo_02_upload.svg" alt="사진 불러오기"></button></li>
@@ -376,9 +410,9 @@ function adornComplete() {
 				</ul>
 			</div> <!-- // ad_item_btn -->
 
-			<div class="ad_bg_sel">
+			<div class="adorn_bg_sel">
 				<h3>배경</h3>
-				<div class="ad_bg_list ad_pop">
+				<div class="adorn_bg_list adorn_pop">
 					<ul>
 						<li>
 							<div class="inp_radio">
@@ -411,17 +445,17 @@ function adornComplete() {
 							</div>
 						</li>
 					</ul>
-					<button class="ad_pop_close">close</button>
+					<button class="adorn_pop_close">close</button>
 				</div>
-				<div class="ad_bg_file">
+				<div class="adorn_bg_file">
 					<input type="file" name="file" id="uploadFile" class="blind" accept="image/*">
 					<button onclick="document.getElementById('uploadFile').click();">사진 불러오기</button>
 				</div>
 			</div> <!-- // bg_sel -->
 
-			<div class="ad_stk_sel">
+			<div class="adorn_stk_sel">
 				<h3>스티커</h3>
-				<div class="ad_stk_list ad_pop">
+				<div class="adorn_stk_list adorn_pop">
 					<ul>
 						<li><button><img src="./images/sticker/sticker01.svg" alt=""></button></li>
 						<li><button><img src="./images/sticker/sticker02.svg" alt=""></button></li>
@@ -444,23 +478,23 @@ function adornComplete() {
 						<li><button><img src="./images/sticker/sticker19.svg" alt=""></button></li>
 						<li><button><img src="./images/sticker/sticker20.svg" alt=""></button></li>
 					</ul>
-					<button class="ad_pop_close">close</button>
+					<button class="adorn_pop_close">close</button>
 				</div>
 			</div> <!-- // stk_sel -->
 
-			<div class="ad_tex_sel">
+			<div class="adorn_tex_sel">
 				<h3>텍스트</h3>
 
-				<div class="ad_tex_area ad_pop">
+				<div class="adorn_tex_area adorn_pop">
 					<div class="tex_area">
 						<textarea id="tex_area" placeholder="텍스트를 입력해주세요."></textarea>
 						<button id="tex_comp">완료</button>
 					</div>
-					<button class="ad_pop_close">close</button>
+					<button class="adorn_pop_close">close</button>
 				</div>
 
-				<div class="ad_tex_opt ad_pop">
-					<div class="ad_tex_col">
+				<div class="adorn_tex_opt adorn_pop">
+					<div class="adorn_tex_col">
 						<dl>
 							<dt><strong>색상</strong></dt>
 							<dd>
@@ -526,7 +560,7 @@ function adornComplete() {
 						</dl>
 					</div>
 
-					<div class="ad_tex_siz">
+					<div class="adorn_tex_siz">
 						<dl>
 							<dt>크기</dt>
 							<dd>
@@ -550,34 +584,49 @@ function adornComplete() {
 						</dl>
 					</div>
 					
-					<button class="ad_pop_close">close</button>
-				</div> <!-- // ad_tex_opt -->
+					<button class="adorn_pop_close">close</button>
+				</div> <!-- // adorn_tex_opt -->
 
-			</div> <!-- // ad_tex_sel -->
+			</div> <!-- // adorn_tex_sel -->
 
 		</div> <!-- // adorn_item -->
 	</div> <!-- // adorn_wrap -->
 
 	<div class="adorn_footer">
 
-		<div class="ad_hashtag">
+		<div class="adorn_hashtag">
 			<ul>
 				<li>#유플러스</li>
 				<li>#아이폰14</li>
 				<li>#MBT_i</li>
 				<li>#유플펀</li>
 			</ul>
-		</div> <!-- // ad_hashtag -->
+		</div> <!-- // adorn_hashtag -->
 
-		<div class="ad_complete">
+		<div class="adorn_complete">
 			<button onclick="adornComplete()">
 				<img src="./images/btn/btn_mo_bottom.png" alt="배경 저장하고 이벤트 응모하기">
 			</button>
-		</div> <!-- // ad_complete -->
+		</div> <!-- // adorn_complete -->
 		
 	</div> <!-- // adorn_footer -->
 
 	<button class="close" onclick="window.open('','_self').close();"><span class="blind">close</span></button>
 </div> <!-- // wrap -->
+
+<!-- layer popup --> <!-- 2022.10.05 레이어팝업 추가 -->
+<div class="alert" id="alert02">
+	<div class="layer_pop">
+		<div class="layer_pop_inner">
+			<div><img src="../images/icon/ico_complete.svg" alt="체크표시"></div>
+			이미지가 저장되고 해시태그가<br>복사되었습니다.인스타그램에 게재하여야<br>이벤트에 응모됩니다.
+		</div>
+		<button id="hashtagbtn">확인</button>
+	</div>
+</div>
+
+<div class="dim"></div>
+<!-- // layer popup -->
+
 </body>
 </html>
