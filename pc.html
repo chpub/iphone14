@@ -124,8 +124,15 @@ function stickerMake(src) {
 		$('#' + itemId).resizable({
 			aspectRatio: true,
 			// handles: "n, e, s, w, se, sw, nw, ne",
-			handles: "se"
+			handles: "se",
+			wheelRotate: false
 		});
+
+		setTimeout(function() {
+			var itemImgW = $('#' + itemId).find('img').width();
+			var itemImgH = $('#' + itemId).find('img').height();
+			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
+		}, 1);
 
 	} else {
 

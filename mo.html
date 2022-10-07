@@ -186,6 +186,11 @@ function stickerMake(src) {
 			handles: "se"
 		});
 
+		setTimeout(function() {
+			var itemImgW = $('#' + itemId).find('img').width();
+			var itemImgH = $('#' + itemId).find('img').height();
+			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
+		}, 1);
 
 	} else {
 
