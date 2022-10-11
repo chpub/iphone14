@@ -191,7 +191,7 @@ function stickerMake(src) {
 			var itemImgW = $('#' + itemId).find('img').width();
 			var itemImgH = $('#' + itemId).find('img').height();
 			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
-		}, 10);
+		}, 100);
 
 	} else {
 
@@ -213,7 +213,7 @@ function stickerMake(src) {
 		var itemTop = ($('.adorn_zone').height() / 2) - ($('#' + itemId).height() / 2);
 		var itemleft = ($('.adorn_zone').width() / 2) - ($('#' + itemId).width() / 2);
 		$('#' + itemId).css({'left':itemleft, 'top':itemTop});
-	}, 10);
+	}, 100);
 
 
 	// sticker event
