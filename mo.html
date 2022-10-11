@@ -186,11 +186,12 @@ function stickerMake(src) {
 			handles: "se"
 		});
 
+		// 2022.10.07 추가
 		setTimeout(function() {
 			var itemImgW = $('#' + itemId).find('img').width();
 			var itemImgH = $('#' + itemId).find('img').height();
 			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
-		}, 1);
+		}, 10);
 
 	} else {
 

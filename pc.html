@@ -125,9 +125,10 @@ function stickerMake(src) {
 			aspectRatio: true,
 			// handles: "n, e, s, w, se, sw, nw, ne",
 			handles: "se",
-			wheelRotate: false
+			wheelRotate: false // 2022.10.07 추가
 		});
 
+		// 2022.10.07 추가
 		setTimeout(function() {
 			var itemImgW = $('#' + itemId).find('img').width();
 			var itemImgH = $('#' + itemId).find('img').height();

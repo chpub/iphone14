@@ -32,7 +32,7 @@
       step: 22.5, // angle in degrees that the rotation should be snapped to
       stop: null, // callback when rotation stops
       transforms: null, // other transforms to performed on the element
-      wheelRotate: false // boolean flag, should the element rotate when the mousewheel is rotated?
+      wheelRotate: false // boolean flag, should the element rotate when the mousewheel is rotated? // 2022.10.07 wheelRotate: true -> wheelRotate: false 변경
     },
 
     // accessor for the angle in radians
