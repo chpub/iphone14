@@ -191,7 +191,7 @@ function stickerMake(src) {
 			var itemImgW = $('#' + itemId).find('img').width();
 			var itemImgH = $('#' + itemId).find('img').height();
 			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
-		}, 100);
+		}, 50); // 2022.10.11 수정
 
 	} else {
 
@@ -213,7 +213,7 @@ function stickerMake(src) {
 		var itemTop = ($('.adorn_zone').height() / 2) - ($('#' + itemId).height() / 2);
 		var itemleft = ($('.adorn_zone').width() / 2) - ($('#' + itemId).width() / 2);
 		$('#' + itemId).css({'left':itemleft, 'top':itemTop});
-	}, 100);
+	}, 50); // 2022.10.11 수정
 
 
 	// sticker event
@@ -242,7 +242,7 @@ function stickerMake(src) {
 
 			$(this).find('.text').removeClass('new');
 		} else {
-			ad_pop_close();
+			adorn_pop_close();
 		}
 	});
 
@@ -365,11 +365,13 @@ function adornComplete() {
 				<div class="img">
 					<img src="./images/icon/star_ico.png" alt="">
 				</div>
+
+				<!-- 2022.10.11 수정 -->
 				<ul>
 					<li>
 						<em>STEP1</em>
 						<span>
-							내가 원하는 기본 배경 OR 사진 선택(4:5비율)
+							내가 원하는 <em>기본 배경</em> or <em>갤러리</em>에서 사진 선택(4:5비율)
 						</span>
 					</li>
 					<li>
@@ -385,6 +387,7 @@ function adornComplete() {
 						</span> 
 					</li>
 				</ul>
+				<!-- // 2022.10.11 수정 -->
 				<p>
 					모든 저작물은 초상권, 지적재산권, 저작권 등의 법리적 문제가 전혀 없어야 하며 문제가 있을 시 수상에서 제외될 수 있습니다
 				</p>
@@ -408,12 +411,16 @@ function adornComplete() {
 		<div class="adorn_item">
 		
 			<div class="adorn_item_btn">
+
+				<!-- 2022.10.11 수정 -->
 				<ul>
-					<li class="item_bg"><button><img src="./images/btn/btn_mo_01_bg.svg" alt="배경이미지"></button></li>
-					<li class="item_file"><button onclick="document.getElementById('uploadFile').click();"><img src="./images/btn/btn_mo_02_upload.svg" alt="사진 불러오기"></button></li>
-					<li class="item_stk"><button><img src="./images/btn/btn_mo_03_sticker.svg" alt="스티커"></button></li>
-					<li class="item_tex"><button><img src="./images/btn/btn_mo_04_text.svg" alt="텍스트"></button></li>
+					<li class="item_bg"><button><img src="./images/btn/btn_mo_01_bg.svg" alt="배경이미지"><span>기본배경</span></button></li>
+					<li class="item_file"><button onclick="document.getElementById('uploadFile').click();"><img src="./images/btn/btn_mo_02_upload.svg" alt="사진 불러오기"><span>갤러리</span></button></li>
+					<li class="item_stk"><button><img src="./images/btn/btn_mo_03_sticker.svg" alt="스티커"><span>스티커</span></button></li>
+					<li class="item_tex"><button><img src="./images/btn/btn_mo_04_text.svg" alt="텍스트"><span>텍스트</span></button></li>
 				</ul>
+				<!-- // 2022.10.11 수정 -->
+
 			</div> <!-- // ad_item_btn -->
 
 			<div class="adorn_bg_sel">
@@ -602,6 +609,7 @@ function adornComplete() {
 
 		<div class="adorn_hashtag">
 			<ul>
+				<li>필수해시태그</li>
 				<li>#유플러스</li>
 				<li>#아이폰14</li>
 				<li>#MBT_i</li>

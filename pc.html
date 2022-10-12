@@ -133,7 +133,7 @@ function stickerMake(src) {
 			var itemImgW = $('#' + itemId).find('img').width();
 			var itemImgH = $('#' + itemId).find('img').height();
 			$('#' + itemId).css({'width':itemImgW, 'height':itemImgH});
-		}, 1);
+		}, 100); // 2022.10.12 수정
 
 	} else {
 
@@ -148,12 +148,13 @@ function stickerMake(src) {
 	$('#' + itemId).append('<button type="button" class="del"><span class="blind">delete</span></button>');
 
 	$('#' + itemId).rotatable().draggable();
+	$('#' + itemId).hide(); // 2022.10.12 추가
 	
 	setTimeout(function() {
 		var itemTop = ($('.adorn_zone').height() / 2) - ($('#' + itemId).height() / 2);
 		var itemleft = ($('.adorn_zone').width() / 2) - ($('#' + itemId).width() / 2);
-		$('#' + itemId).css({'left':itemleft, 'top':itemTop});
-	}, 10);
+		$('#' + itemId).css({'left':itemleft, 'top':itemTop}).show();
+	}, 10); // 2022.10.12 수정
 
 
 	// sticker event
@@ -287,20 +288,27 @@ function adornComplete() {
 		</div> <!-- // adorn_tit -->
 	
 		<div class="cont_tit">
+
+			<!-- 2022.10.12 수정 -->
 			<ul>
 				<li>
-					<em>STEP1</em>
-					<span>내가 원하는 기본 배경 OR 사진 선택(4:5비율)</span>
+					<em class="step">STEP1</em>
+					<span>내가 원하는 <em class="acc">기본 배경</em> or <em class="acc">PC</em>에서 사진 불러오기(4:5비율)
+
+						<span class="ref">* 꾸미기 배경 이미지는 4:5 비율로 최적화 되어 있습니다.</span>
+					</span> 
 				</li>
 				<li>
-					<em>STEP2</em>
-					<span>내 마음에 드는 스티커 & 텍스트 추가해서 배경꾸미기</span>
+					<em class="step">STEP2</em>
+					<span>내 마음에 드는 <em class="acc">스티커</em> & <em class="acc">텍스트</em> 추가해서 배경꾸미기</span>
 				</li>
 				<li>
-					<em>STEP3</em>
-					<span>인스타그램에 태그 작성해서 올리면 이벤트 참여 끝!</span> 
+					<em class="step">STEP3</em>
+					<span><em class="acc">인스타그램</em>에 태그 작성해서 올리면 <em class="acc">이벤트 참여</em> 끝!</span> 
 				</li>
 			</ul>
+			<!-- // 2022.10.12 수정 -->
+			
 		</div> <!-- // cont_tit -->
 
 	</div> <!-- // adorn_header -->
@@ -334,44 +342,54 @@ function adornComplete() {
 	
 			<div class="adorn_bg_sel">
 				<h3>배경</h3>
-				<div class="adorn_bg_list">
-					<ul>
-						<li>
-							<div class="inp_radio">
-								<input type="radio" name="bg_sel" id="bg01" value="./images/bg/bg_img01.jpg" checked>
-								<label for="bg01"><img src="./images/bg/bg_img01.jpg" alt="배경이미지01"></label>
-							</div>
-						</li>
-						<li>
-							<div class="inp_radio">
-								<input type="radio" name="bg_sel" id="bg02" value="./images/bg/bg_img02.jpg">
-								<label for="bg02"><img src="./images/bg/bg_img02.jpg" alt="배경이미지02"></label>
-							</div>
-						</li>
-						<li>
-							<div class="inp_radio">
-								<input type="radio" name="bg_sel" id="bg03" value="./images/bg/bg_img03.jpg">
-								<label for="bg03"><img src="./images/bg/bg_img03.jpg" alt="배경이미지03"></label>
-							</div>
-						</li>
-						<li>
-							<div class="inp_radio">
-								<input type="radio" name="bg_sel" id="bg04" value="./images/bg/bg_img04.jpg">
-								<label for="bg04"><img src="./images/bg/bg_img04.jpg" alt="배경이미지04"></label>
-							</div>
-						</li>
-						<li>
-							<div class="inp_radio">
-								<input type="radio" name="bg_sel" id="bg05" value="./images/bg/bg_img05.jpg">
-								<label for="bg05"><img src="./images/bg/bg_img05.jpg" alt="배경이미지05"></label>
-							</div>
-						</li>
-					</ul>
+
+				<!-- 2022.10.12 수정 -->
+				<div class="adorn_bg_inner">
+					<div class="adorn_bg_list">
+						<ul>
+							<li>
+								<div class="inp_radio">
+									<input type="radio" name="bg_sel" id="bg01" value="./images/bg/bg_img01.jpg" checked>
+									<label for="bg01"><img src="./images/bg/bg_img01.jpg" alt="배경이미지01"></label>
+								</div>
+							</li>
+							<li>
+								<div class="inp_radio">
+									<input type="radio" name="bg_sel" id="bg02" value="./images/bg/bg_img02.jpg">
+									<label for="bg02"><img src="./images/bg/bg_img02.jpg" alt="배경이미지02"></label>
+								</div>
+							</li>
+							<li>
+								<div class="inp_radio">
+									<input type="radio" name="bg_sel" id="bg03" value="./images/bg/bg_img03.jpg">
+									<label for="bg03"><img src="./images/bg/bg_img03.jpg" alt="배경이미지03"></label>
+								</div>
+							</li>
+							<li>
+								<div class="inp_radio">
+									<input type="radio" name="bg_sel" id="bg04" value="./images/bg/bg_img04.jpg">
+									<label for="bg04"><img src="./images/bg/bg_img04.jpg" alt="배경이미지04"></label>
+								</div>
+							</li>
+							<li>
+								<div class="inp_radio">
+									<input type="radio" name="bg_sel" id="bg05" value="./images/bg/bg_img05.jpg">
+									<label for="bg05"><img src="./images/bg/bg_img05.jpg" alt="배경이미지05"></label>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<!-- 2022.10.12 디자인수정 -->
+					<div class="adorn_bg_file">
+						<input type="file" name="file" id="uploadFile" class="blind" accept="image/*"> <!-- file_extension|audio/*|video/*|image/*|media_type -->
+						<button onclick="document.getElementById('uploadFile').click();"><img src="./images/icon/ico_img.svg" alt="사진불러오기">PC에서 사진 불러오기</button>
+					</div> 
+					<!-- // 2022.10.12 디자인수정 -->
+					
 				</div>
-				<div class="adorn_bg_file">
-					<input type="file" name="file" id="uploadFile" class="blind" accept="image/*"> <!-- file_extension|audio/*|video/*|image/*|media_type -->
-					<button onclick="document.getElementById('uploadFile').click();">PC에서 사진 불러오기</button>
-				</div>
+				<!-- // 2022.10.12 수정 -->
+
 			</div> <!-- // bg_sel -->
 	
 			<div class="adorn_stk_sel">
@@ -478,6 +496,7 @@ function adornComplete() {
 						</dl>
 					</div>
 	
+					<!-- 2022.10.12 수정 -->
 					<div class="adorn_tex_siz">
 						<dl>
 							<dt><strong>크기</strong></dt>
@@ -501,6 +520,7 @@ function adornComplete() {
 							</dd>
 						</dl>
 					</div>
+					<!-- // 2022.10.12 수정 -->
 					
 				</div> <!-- // adorn_tex_opt -->
 	
@@ -512,6 +532,15 @@ function adornComplete() {
 	
 	<div class="adorn_footer">
 
+		<!-- 2022.10.12 위치변경 및 수정 -->
+		<div class="adorn_complete">
+			<button onclick="adornComplete()"><img src="./images/btn/btn_pc_bottom.png" alt="배경 저장하고 이벤트 응모하기"></button>
+			<!-- <span> 2022.10.12 제거
+				모든 저작물은 초상권, 지적재산권, 저작권 등의 법리적 문제가 전혀 없어야 하며<br>
+				문제가 있을 시 수상에서 제외될 수 있습니다 
+			</span> -->
+		</div> <!-- // adorn_complete -->
+
 		<div class="adorn_hashtag">
 			<strong>이벤트 참여 필수 해시태그</strong>
 			<ul>
@@ -522,14 +551,7 @@ function adornComplete() {
 			</ul>
 			<i>* 이벤트 응모 시 자동 복사 됩니다.</i>
 		</div> <!-- // adorn_hashtag -->
-	
-		<div class="adorn_complete">
-			<button onclick="adornComplete()"><img src="./images/btn/btn_pc_bottom.png" alt="배경 저장하고 이벤트 응모하기"></button>
-			<span>
-				모든 저작물은 초상권, 지적재산권, 저작권 등의 법리적 문제가 전혀 없어야 하며<br>
-				문제가 있을 시 수상에서 제외될 수 있습니다 
-			</span>
-		</div> <!-- // adorn_complete -->
+		<!-- // 2022.10.12 위치변경 및 수정 -->
 		
 	</div> <!-- // adorn_footer -->
 
