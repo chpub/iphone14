@@ -46,7 +46,12 @@
 	url('../fonts/noto-sans-kr-v27-korean-900.ttf') format('truetype'),
 	url('../fonts/noto-sans-kr-v27-korean-900.svg#NotoSansKR') format('svg');
 }
-
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* ***** common ***** */
 body, textarea, button {font-family:"Noto Sans KR", -apple-system, "droid sans fallback", "Apple SD Gothic Neo", AppleGothic, "Malgun Gothic", "맑은 고딕", Dotum, 돋움, sans-serif;}

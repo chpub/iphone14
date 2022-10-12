@@ -27,6 +27,7 @@ $(window).resize(function() {
 
 $(document).ready(function(){
 
+	// 2022.10.12
 	if (isMobileIphone()) {
 		//모바일대응뷰포트강제설정
 		var mobile = document.createElement('meta');
@@ -40,7 +41,7 @@ $(document).ready(function(){
 		document.getElementsByTagName('head')[0].appendChild(fonts);
 		document.body.innerHTML = 
 			"<style>body{margin:0; padding:0; font-family: 'Noto Sans KR', sans-serif; overflow:hidden; height:100%;}</style>" +
-			"<div class='inner' style='padding:15.0427vw 7.2650vw 57.2650vw; text-align:center;'>" +
+			"<div style='padding:15.0427vw 7.2650vw 57.2650vw; text-align:center;'>" +
 				"<img src='./images/icon/ico_exclamation mark.svg' alt='' style='width:21.3675vw;'>" +
 				"<h2 style='padding-top:8.5470vw; padding-bottom:3.4188vw; margin:0; font-size:6.1538vw; font-weight:bold; text-align:center; font-family:Noto Sans KR, sans-serif;'>인앱브라우저 호환문제로 인해<br />Safari로 접속해야합니다.</h2>" +
 				"<article style='text-align:center; font-size:4.1026vw; word-break:keep-all;color:#999;'>아래 버튼을 눌러 Safari를 실행해주세요<br />Safari가 열리면, 주소창을 길게 터치한 뒤,<br />'붙여놓기 및 이동'을 누르면<br />정상적으로 이용할 수 있습니다.<br /><br />" +
@@ -456,7 +457,7 @@ function isMobileIphone() {
 
 				<!-- 2022.10.11 수정 -->
 				<ul>
-					<li class="item_bg"><button><img src="./images/btn/btn_mo_01_bg.svg" alt="배경이미지"><span>기본배경</span></button></li>
+					<li class="item_bg"><button><img src="./images/btn/btn_mo_01_bg.svg" alt="배경이미지"><span>배경</span></button></li>
 					<li class="item_file"><button onclick="document.getElementById('uploadFile').click();"><img src="./images/btn/btn_mo_02_upload.svg" alt="사진 불러오기"><span>갤러리</span></button></li>
 					<li class="item_stk"><button><img src="./images/btn/btn_mo_03_sticker.svg" alt="스티커"><span>스티커</span></button></li>
 					<li class="item_tex"><button><img src="./images/btn/btn_mo_04_text.svg" alt="텍스트"><span>텍스트</span></button></li>
@@ -615,29 +616,31 @@ function isMobileIphone() {
 						</dl>
 					</div>
 
+					<!-- 2022.10.12 폰트사이즈수정 -->
 					<div class="adorn_tex_siz">
 						<dl>
 							<dt>크기</dt>
 							<dd>
 								<div class="inp_radio">
-									<input type="radio" name="font_siz" id="foSize01" value="40px" checked>
+									<input type="radio" name="font_siz" id="foSize01" value="12px" checked>
 									<label for="foSize01">Aa</label>
 								</div>
 							</dd>
 							<dd>
 								<div class="inp_radio">
-									<input type="radio" name="font_siz" id="foSize02" value="70px">
+									<input type="radio" name="font_siz" id="foSize02" value="20px">
 									<label for="foSize02">Aa</label>
 								</div>
 							</dd>
 							<dd>
 								<div class="inp_radio">
-									<input type="radio" name="font_siz" id="foSize03" value="100px">
+									<input type="radio" name="font_siz" id="foSize03" value="30px">
 									<label for="foSize03">Aa</label>
 								</div>
 							</dd>
 						</dl>
 					</div>
+					<!-- // 2022.10.12 폰트사이즈수정 -->
 					
 					<button class="adorn_pop_close">close</button>
 				</div> <!-- // adorn_tex_opt -->
