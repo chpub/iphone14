@@ -17,14 +17,17 @@
 .adorn_zone {position:relative; overflow:hidden;}
 .adorn_zone .adorn_bg {position:absolute; top:0; left:0; width:100%; height:100%; background:no-repeat center / cover;}
 
-.adorn_info {position:absolute; top:0; left:0; width:100%; height:100%; padding:12.8205vw 12.8205vw 6.4102vw; box-sizing:border-box; color:#fff; text-align:center; word-break:keep-all;}
+.adorn_info {position:absolute; top:0; left:0; width:100%; height:100%; padding:17.9487vw 5.8974vw 39.1453vw 13.5897vw; box-sizing:border-box; color:#fff; text-align:center; word-break:keep-all;}
 .adorn_info .img {margin-bottom:2.735vw; text-align:center;}
 .adorn_info .img img {width:15.641vw; max-width:100%;}
 .adorn_info ul {font-weight:bold;}
-.adorn_info ul li {display:flex; align-items:center; font-size:4.7863vw; line-height:6.8376vw; text-align:left;}
+.adorn_info ul li {display:flex; font-size:4.7863vw; line-height:6.8376vw; text-align:left;}
 .adorn_info ul li ~ li {margin-top:2.5641vw;}
 .adorn_info ul li span {padding-left:2.5641vw;}
-.adorn_info ul li em {width:17.094vw; height:6.8376vw; padding:0.8547vw 3.1623vw; font-size:3.7606vw; color:#fff; font-weight:bold; background-color:#0F6FA7; border-radius:6.8376vw; font-style:normal; text-align:center;}
+.adorn_info ul li .step {width:17.094vw; height:6.8376vw; padding:0.8547vw 3.1623vw; font-size:3.7606vw; color:#fff; font-weight:bold; background-color:#0F6FA7; border-radius:6.8376vw; font-style:normal; text-align:center;}
+.adorn_info ul li .acc {display:inline-block; position:relative; padding:0 3px; font-style:normal; z-index:10;}
+.adorn_info ul li .acc:before {content:""; display:block; position:absolute; top:50%; left:0; width:100%; height:3.4188vw; background-color:#3AADEF; z-index:-1;}
+.adorn_info ul li .ref {padding-left:0; font-size:3.5897vw; font-weight:normal; opacity:0.7;}
 .adorn_info p {margin-top:6.5811vw; font-size:3.589vw; opacity:0.7;}
 .adorn_info.active {display:none;}
 
@@ -65,12 +68,13 @@
 
 /* *** adorn_item *** */
 
-.adorn_item_btn {padding:20px 47px 7px;}
+.adorn_item_btn {padding:3.4188vw 11.9658vw 7px;}
 .adorn_item_btn ul {display:flex;}
 .adorn_item_btn li {width:calc((100% - 60px) / 4);}
 .adorn_item_btn li ~ li {margin-left:20px;}
 .adorn_item_btn button {display:block; padding:0; border:0; background-color:transparent;}
 .adorn_item_btn button img {display:block; width:100%;}
+.adorn_item_btn button span {font-size:3.7607vw; font-weight:bold;}
 
 
 
@@ -108,7 +112,7 @@
 /* text */
 .adorn_tex_area .tex_area {position:relative; display:flex; align-items:flex-start; max-width:100%; min-height:175px; padding:25px 20px 63px; margin:83px 20px 0; border-radius:7px; box-sizing:border-box; background-color:#fff;}
 .adorn_tex_area textarea {display:block; flex:1; width:100%; height:78px; padding:0; margin:0; border:0; box-sizing:border-box; font-size:18px; overflow:hidden; overflow-y:auto; resize:none; outline:none;}
-.adorn_tex_area button {position:absolute; bottom:20px; right:20px; width:74px; height:43px; padding:0; border:none; background-color:#000; color:#fff; font-weight:bold; border-radius:7px;}
+.adorn_tex_area button {position:absolute; bottom:20px; right:20px; width:74px; height:43px; font-size:18px; line-height:43px; padding:0; border:none; background-color:#000; color:#fff; font-weight:bold; border-radius:7px;}
 
 /* text_opt */
 .adorn_tex_opt.adorn_pop {top:auto; transform:translateY(100%); transition:transform 0.3s; padding:56px 28px 33px; border-radius:20px 20px 0 0; background-color:#fff; box-shadow:0 0 10px rgba(0, 0, 0, 0.3); text-align:center;}
@@ -158,7 +162,9 @@
 /* hashtag */
 .adorn_hashtag {padding:0 20px; text-align:center;}
 .adorn_hashtag strong {display:none;}
-.adorn_hashtag li {display:inline-block; font-size:4vw;}
+.adorn_hashtag li {display:inline-block; font-size:3.2479vw; color:#666;}
+.adorn_hashtag .acc01 {position:relative; font-size:3.2479vw; color:#000; font-weight:bold; z-index:1;}
+.adorn_hashtag .acc01:after {content:""; display:block; position:absolute; top:50%; left:0; width:100%; height:2.5641vw; background-color:#FFD201; z-index:-1;}
 .adorn_hashtag i {display:none;}
 
 /* complete btn */
