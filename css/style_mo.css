@@ -68,7 +68,7 @@
 
 /* *** adorn_item *** */
 
-.adorn_item_btn {padding:3.4188vw 11.9658vw 7px;}
+.adorn_item_btn {padding:3.4188vw 11.9658vw 1.8803vw;}
 .adorn_item_btn ul {display:flex;}
 .adorn_item_btn li {width:calc((100% - 60px) / 4);}
 .adorn_item_btn li ~ li {margin-left:20px;}
@@ -168,7 +168,7 @@
 .adorn_hashtag i {display:none;}
 
 /* complete btn */
-.adorn_complete {margin-top:12px;}
+.adorn_complete {margin-top:1.0256vw;}
 .adorn_complete button {display:block; padding:0; border:0;}
 .adorn_complete button img {display:block; width:100%;}
 
