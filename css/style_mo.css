@@ -74,7 +74,7 @@
 .adorn_item_btn li ~ li {margin-left:20px;}
 .adorn_item_btn button {display:block; padding:0; border:0; background-color:transparent;}
 .adorn_item_btn button img {display:block; width:100%;}
-.adorn_item_btn button span {font-size:3.7607vw; font-weight:bold;}
+.adorn_item_btn button span {font-size:3.7607vw; color:#000; font-weight:bold;}
 
 
 
