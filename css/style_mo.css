@@ -17,17 +17,17 @@
 .adorn_zone {position:relative; overflow:hidden;}
 .adorn_zone .adorn_bg {position:absolute; top:0; left:0; width:100%; height:100%; background:no-repeat center / cover;}
 
-.adorn_info {position:absolute; top:0; left:0; width:100%; height:100%; padding:17.9487vw 5.8974vw 39.1453vw 13.5897vw; box-sizing:border-box; color:#fff; text-align:center; word-break:keep-all;}
+.adorn_info {position:absolute; top:0; left:0; width:100%; height:100%; padding:17.9487vw 9.7436vw 39.1453vw 9.7436vw; box-sizing:border-box; color:#fff; text-align:center; word-break:keep-all;}
 .adorn_info .img {margin-bottom:2.735vw; text-align:center;}
 .adorn_info .img img {width:15.641vw; max-width:100%;}
 .adorn_info ul {font-weight:bold;}
 .adorn_info ul li {display:flex; font-size:4.7863vw; line-height:6.8376vw; text-align:left;}
-.adorn_info ul li ~ li {margin-top:2.5641vw;}
+.adorn_info ul li ~ li {margin-top:6.8376vw;}
 .adorn_info ul li span {padding-left:2.5641vw;}
 .adorn_info ul li .step {width:17.094vw; height:6.8376vw; padding:0.8547vw 3.1623vw; font-size:3.7606vw; color:#fff; font-weight:bold; background-color:#0F6FA7; border-radius:6.8376vw; font-style:normal; text-align:center;}
 .adorn_info ul li .acc {display:inline-block; position:relative; padding:0 3px; font-style:normal; z-index:10;}
 .adorn_info ul li .acc:before {content:""; display:block; position:absolute; top:50%; left:0; width:100%; height:3.4188vw; background-color:#3AADEF; z-index:-1;}
-.adorn_info ul li .txt {line-height:4.7863vw;}
+.adorn_info ul li .txt {line-height:4.4444vw;}
 .adorn_info ul li .ref {padding-left:0; font-size:3.5897vw; font-weight:normal; opacity:0.7;}
 .adorn_info p {margin-top:6.5811vw; font-size:3.589vw; opacity:0.7;}
 .adorn_info.active {display:none;}
@@ -69,7 +69,7 @@
 
 /* *** adorn_item *** */
 
-.adorn_item_btn {padding:3.4188vw 11.9658vw 1.8803vw;}
+.adorn_item_btn {padding:3.4188vw 11.9658vw 1.5803vw;}
 .adorn_item_btn ul {display:flex;}
 .adorn_item_btn li {width:calc((100% - 60px) / 4);}
 .adorn_item_btn li ~ li {margin-left:20px;}
@@ -169,7 +169,7 @@
 .adorn_hashtag i {display:none;}
 
 /* complete btn */
-.adorn_complete {margin-top:1.0256vw;}
+.adorn_complete {margin-top:2.5256vw;}
 .adorn_complete button {display:block; padding:0; border:0;}
 .adorn_complete button img {display:block; width:100%;}
 
