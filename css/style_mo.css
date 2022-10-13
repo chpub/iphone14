@@ -185,5 +185,6 @@
 .dim {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,.65); z-index:10;} 
 #alert02 {display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); width:89.7436vw; background-color:#fff; border-radius: 20px; z-index:100;} 
 #alert02 .layer_pop_inner {padding:11.9658vw 11.5385vw; font-size:3.5897vw; text-align:center;} 
+#alert02 .layer_pop_inner em {position:relative; font-weight:bold; font-style:normal; text-decoration:underline;} 
 #alert02 .layer_pop_inner img {width:21.3675vw; margin-bottom:5.1282vw;} 
 #alert02 button {width:100%; height:13.5897vw; font-size:3.9316vw; font-weight:bold; color:#fff; background-color:#000; border:0; border-bottom-right-radius:20px; border-bottom-left-radius:20px;}
