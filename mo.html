@@ -350,8 +350,8 @@ function adornComplete() {
 			extra_canvas.getContext('2d').drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, extra_canvas.width, extra_canvas.height);
 
 			var myImage = document.createElement('a');
-			myImage.href = extra_canvas.toDataURL('image/jpg');
-			myImage.download = 'mbti_' + rand_0_100 + '.jpg';
+			myImage.href = extra_canvas.toDataURL('image/png');
+			myImage.download = 'mbti_' + rand_0_100 + '.png';
 
 			myImage.click();
 		});
