@@ -148,7 +148,7 @@ function stickerMake(src) {
 	$('#' + itemId).append('<button type="button" class="del"><span class="blind">delete</span></button>');
 
 	$('#' + itemId).rotatable().draggable();
-	$('#' + itemId).hide(); // 2022.10.12 추가
+	$('#' + itemId).css('display', 'none'); // 2022.10.12 추가
 	
 	setTimeout(function() {
 		var itemTop = ($('.adorn_zone').height() / 2) - ($('#' + itemId).height() / 2);
@@ -558,11 +558,15 @@ function adornComplete() {
 <!-- layer popup --> <!-- 2022.10.05 레이어팝업 추가 -->
 <div class="alert" id="alert02">
 	<div class="layer_pop">
+
+		<!-- 2022.10.12 텍스트추가 -->
 		<div class="layer_pop_inner">
 			<div><img src="./images/icon/ico_complete.svg" alt="체크표시"></div>
 			이미지가 저장되고 해시태그가<br>복사되었습니다. 인스타그램에 게재하여야<br>이벤트에 응모됩니다.<br>
 			(IOS는 파일 앱에 저장됩니다.)
 		</div>
+		<!-- // 2022.10.12 텍스트추가 -->
+
 		<button id="hashtagbtn">확인</button>
 	</div>
 </div>
