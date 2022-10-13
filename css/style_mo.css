@@ -12,9 +12,9 @@
 
 /* ***** adorn_content ***** */
 
-.adorn_area {position:relative; border-bottom:solid 1px #efefef;}
+.adorn_area {position:relative; border-bottom:solid 1px #efefef; overflow:hidden;}
 
-.adorn_zone {position:relative; overflow:inherit;}
+.adorn_zone {position:relative;}
 .adorn_zone .adorn_bg {position:absolute; top:0; left:0; width:100%; height:100%; background:no-repeat center / cover;}
 
 .adorn_info {position:absolute; top:0; left:0; width:100%; height:100%; padding:17.9487vw 9.7436vw 39.1453vw 9.7436vw; box-sizing:border-box; color:#fff; text-align:center; word-break:keep-all;}
@@ -68,9 +68,7 @@
 
 
 /* *** adorn_item *** */
-.adorn_item {
-    z-index: 1;
-}
+
 .adorn_item_btn {padding:3.4188vw 11.9658vw 1.5803vw;}
 .adorn_item_btn ul {display:flex;}
 .adorn_item_btn li {width:calc((100% - 60px) / 4);}
