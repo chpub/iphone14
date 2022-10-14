@@ -19,6 +19,14 @@
 <script>
 $(document).ready(function(){
 
+	var s = document.createElement("script");
+
+	if (/safari/i.test(navigator.userAgent)) {
+		s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-alpha1/html2canvas.min.js";
+	} else {
+		s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+	};
+
 	// background image fix
 	var bgVal = $('input:radio[name="bg_sel"]:checked').val();
 	$('.adorn_zone .adorn_bg').css('background-image', 'url('+ bgVal +')');
@@ -224,23 +232,23 @@ function adornComplete() {
 		$('#alert01').show(); // 2022.10.04 추가
 	} else {
 
-		$('.sticker').removeClass('active');
+        $('.sticker').removeClass('active');
 
-		var div_adorn_zone = document.getElementById('adorn_zone');
-		var rand_0_100 = Math.floor(Math.random() * 101);
+        var div_adorn_zone = document.getElementById('adorn_zone');
+        var rand_0_100 = Math.floor(Math.random() * 101);
 
-		html2canvas(div_adorn_zone).then(function (canvas) {
-			var extra_canvas = document.createElement('canvas');
-			extra_canvas.width = 2026;
-			extra_canvas.height = 2532;
-			extra_canvas.getContext('2d').drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, extra_canvas.width, extra_canvas.height);
+        html2canvas(div_adorn_zone).then(function (canvas) {
+            var extra_canvas = document.createElement('canvas');
+			extra_canvas.width = 1080;
+			extra_canvas.height = 1350;
+            extra_canvas.getContext('2d').drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, extra_canvas.width, extra_canvas.height);
 
-			var myImage = document.createElement('a');
-			myImage.href = extra_canvas.toDataURL('image/png');
-			myImage.download = 'mbti_' + rand_0_100 + '.png';
+            var myImage = document.createElement('a');
+            myImage.href = extra_canvas.toDataURL('image/jpeg');
+            myImage.download = 'mbti_' + rand_0_100 + '.jpeg';
 
-			myImage.click();
-		});
+            myImage.click();
+        });
 
 		
 		// 이미지 생성, 다운로드 (dom-to-image, FileSaver js)
